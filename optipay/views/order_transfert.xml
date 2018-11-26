@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <report
+  id="transfert_order"
+  model="hr.contribution.register"
+  string="Order de Virement"
+  report_type="qweb-pdf"
+  name="optipay.report_order_transfert_view"
+  file="optipay.transfer_order"
+  menu="False"
+  />
+
+
+<template id="report_order_transfert_view">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="main_report" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1">
+		<parameter name="IDU" class="java.lang.Integer"/>
+		<parameter name="DATE_PAIE" class="java.util.Date"/>
+		<queryString>
+			<![CDATA[SELECT
+     hr_payslip_line."total",
+     hr_employee."name_related",
+     res_partner_bank."acc_number",
+     hr_employee."bank_account_id" AS hr_employee_bank_account_id,
+     res_bank."id" AS res_bank_id,
+     res_bank."name" AS res_bank_name,
+     res_partner_bank."bank_id" AS res_partner_bank_bank_id
+FROM
+     "hr_payslip_line" hr_payslip_line INNER JOIN "hr_payslip" hr_payslip ON hr_payslip_line."slip_id" = hr_payslip."id"
+     INNER JOIN "hr_employee" hr_employee ON hr_payslip_line."employee_id" = hr_employee."id"
+     INNER JOIN "res_partner_bank" res_partner_bank ON hr_employee."bank_account_id" = res_partner_bank."id"
+     INNER JOIN "public"."res_bank" res_bank ON res_partner_bank."bank_id" = res_bank."id"
+WHERE
+     hr_payslip."date_from" = $P{DATE_PAIE}
+     and hr_payslip_line."name" = 'Net']]>
+		</queryString>
+		<field name="total" class="java.math.BigDecimal"/>
+		<field name="name_related" class="java.lang.String"/>
+		<field name="acc_number" class="java.lang.String"/>
+		<field name="hr_employee_bank_account_id" class="java.lang.Integer"/>
+		<field name="res_bank_id" class="java.lang.Integer"/>
+		<field name="res_bank_name" class="java.lang.String"/>
+		<field name="res_partner_bank_bank_id" class="java.lang.Integer"/>
+		<variable name="TOTAL_NET" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{total}]]></variableExpression>
+		</variable>
+		<variable name="LINE_COUNT" class="java.lang.Integer" calculation="Sum">
+			<variableExpression><![CDATA[1]]></variableExpression>
+			<initialValueExpression><![CDATA[1]]></initialValueExpression>
+		</variable>
+	</subDataset>
+	<parameter name="IDU" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$F{optesis_transfer_order_date_from}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     res_company."id" AS res_company_id,
+     res_partner_bank."id" AS res_partner_bank_id,
+     res_partner_bank."bank_id" AS res_partner_bank_bank,
+     res_partner_bank."acc_number" AS res_partner_bank_acc_number,
+     res_bank."id" AS res_bank_id,
+     res_bank."email" AS res_bank_email,
+     res_bank."city" AS res_bank_city,
+     res_bank."fax" AS res_bank_fax,
+     res_bank."name" AS res_bank_name,
+     res_bank."zip" AS res_bank_zip,
+     res_bank."create_uid" AS res_bank_create_uid,
+     res_bank."country" AS res_bank_country,
+     res_bank."street2" AS res_bank_street2,
+     res_bank."bic" AS res_bank_bic,
+     res_bank."write_uid" AS res_bank_write_uid,
+     res_bank."phone" AS res_bank_phone,
+     res_bank."state" AS res_bank_state,
+     res_bank."street" AS res_bank_street,
+     res_bank."write_date" AS res_bank_write_date,
+     res_bank."active" AS res_bank_active,
+     optesis_transfer_order."id" AS optesis_transfer_order_id,
+     optesis_transfer_order."date_from" AS optesis_transfer_order_date_from
+FROM
+     "public"."res_company" res_company INNER JOIN "public"."res_partner_bank" res_partner_bank ON res_company."id" = res_partner_bank."company_id"
+     INNER JOIN "public"."res_bank" res_bank ON res_partner_bank."bank_id" = res_bank."id",
+     "public"."optesis_transfer_order" optesis_transfer_order
+WHERE
+     res_company."id" = 1
+ AND optesis_transfer_order."id" = $P{IDU}]]>
+	</queryString>
+	<field name="res_company_id" class="java.lang.Integer"/>
+	<field name="res_partner_bank_id" class="java.lang.Integer"/>
+	<field name="res_partner_bank_bank" class="java.lang.Integer"/>
+	<field name="res_partner_bank_acc_number" class="java.lang.String"/>
+	<field name="res_bank_id" class="java.lang.Integer"/>
+	<field name="res_bank_email" class="java.lang.String"/>
+	<field name="res_bank_city" class="java.lang.String"/>
+	<field name="res_bank_fax" class="java.lang.String"/>
+	<field name="res_bank_name" class="java.lang.String"/>
+	<field name="res_bank_zip" class="java.lang.String"/>
+	<field name="res_bank_create_uid" class="java.lang.Integer"/>
+	<field name="res_bank_country" class="java.lang.Integer"/>
+	<field name="res_bank_street2" class="java.lang.String"/>
+	<field name="res_bank_bic" class="java.lang.String"/>
+	<field name="res_bank_write_uid" class="java.lang.Integer"/>
+	<field name="res_bank_phone" class="java.lang.String"/>
+	<field name="res_bank_state" class="java.lang.Integer"/>
+	<field name="res_bank_street" class="java.lang.String"/>
+	<field name="res_bank_write_date" class="java.sql.Timestamp"/>
+	<field name="res_bank_active" class="java.lang.Boolean"/>
+	<field name="optesis_transfer_order_id" class="java.lang.Integer"/>
+	<field name="optesis_transfer_order_date_from" class="java.sql.Date"/>
+	<variable name="DATE_PAIE" class="java.util.Date">
+		<variableExpression><![CDATA[$F{optesis_transfer_order_date_from}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{optesis_transfer_order_date_from}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="182" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="42" width="194" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_bank_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="62" width="194" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{res_bank_street}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="82" width="194" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["BP "+$F{res_bank_zip}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="102" width="194" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{res_bank_state}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="360" y="159" width="178" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="344" y="159" width="16" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Le]]></text>
+			</staticText>
+		</band>
+	</title>
+	<summary>
+		<band height="230">
+			<staticText>
+				<reportElement x="0" y="158" width="555" height="20"/>
+				<textElement/>
+				<text><![CDATA[Veuillez agréer, Monsieur, l'expression de notre parfaite consideration.]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement key="table" style="table" x="0" y="58" width="555" height="80"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1">
+						<datasetParameter name="IDU">
+							<datasetParameterExpression><![CDATA[$P{IDU}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="DATE_PAIE">
+							<datasetParameterExpression><![CDATA[$V{DATE_PAIE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="54">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1"/>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="43" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{LINE_COUNT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="160">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="160" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Prénom - Nom]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="160" height="23"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{name_related}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="123">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="123" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Domiciliation]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="113" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{res_bank_name}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="128">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="128" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[N° compte]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement x="11" y="0" width="107" height="30"/>
+								<textElement verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA["Total: "+$V{LINE_COUNT}+" Virement pour"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField>
+								<reportElement x="11" y="0" width="107" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$F{acc_number}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Montant FCFA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:columnFooter style="table_CH" height="30" rowSpan="1">
+							<textField pattern="#,##0">
+								<reportElement x="10" y="0" width="68" height="30"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.lang.String"><![CDATA[$V{TOTAL_NET}]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="table_TD" height="23" rowSpan="1">
+							<textField pattern="#,##0">
+								<reportElement x="0" y="0" width="78" height="23"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{total}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isStretchWithOverflow="true" pattern="">
+				<reportElement x="0" y="27" width="555" height="31"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Par le débit de notre compte n°"+$F{res_partner_bank_acc_number}+" ouvert dans vos livres, nous vous prions de vouloir efféctuer les virements pour les titulaires de compte ci dessous en règlement de leur rénumérations du mois de "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="149" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Object: Ordre de virement]]></text>
+			</staticText>
+			<textField pattern="MMMMM yyyy">
+				<reportElement x="437" y="39" width="101" height="19"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{optesis_transfer_order_date_from}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
+</template>
+</odoo>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+<!-- <data> -->
+
+      <report
+      id="securite_sociale"
+      model="hr.contribution.register"
+      string="Securite sociale"
+      report_type="qweb-pdf"
+      name="optipay.report_css_view"
+      file="optipay.report_css"
+      menu="False"
+      />
+
+<template id="report_css_view">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                  <table style="width:80%">
+                    <tr>
+                      <td><p><span t-field="res_company.partner_id.street"/></p></td>
+                    </tr>
+                    <tr>
+                      <td style="width:30%"><p>B.P: <span t-field="res_company.partner_id.zip"/></p></td>
+                      <td>Tél: <span t-field="res_company.partner_id.phone"/></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <!-- <td style="width:30%">Fax: <span t-field="res_company.partner_id.fax"/></td> -->
+                      <td style="width:30%">Fax: <!--<span t-field="res_company.partner_id.fax"/>--></td>
+                      <td>Email: <span t-field="res_company.partner_id.email"/></td>
+                      <td></td>
+                    </tr>
+                  </table>
+                  <table style="width:100%">
+                    <tr><td align="center"><h3>Sécurite Sociale</h3></td></tr>
+                  </table>
+                  <table >
+                    <tr align="center">
+                      <td style="width:30%"></td>
+                      <td align="right"><h4> <span style="margin-right:15px;background:#e5e7ea;">Période de</span></h4></td>
+                      <td><h4><span style="margin-right:15px;background:#e5e7ea;" t-esc="data['form']['date_from']"/></h4></td>
+                      <td><h4><span style="background:#e5e7ea;"> à </span></h4></td>
+                      <td><h4><span style=";background:#e5e7ea;margin-left:30px" t-esc="data['form']['date_to']"/></h4></td>
+                      <td style="width:20%"></td>
+                    </tr>
+                  </table>
+                  <br/>
+                  <table class="table table-condensed table-bordered">
+          					<tr>
+          						<td style="min-width:50px" align="center">N°</td>
+          						<td style="min-width:50px" colspan="2" align="center">Identification Employé</td>
+          						<td style="min-width:50px" align="center">Brut imposable</td>
+          						<td style="min-width:50px" align="center">Base</td>
+          						<td style="min-width:50px" align="center">Allocation familiales</td>
+          						<td style="min-width:50px" align="center">Accident de travail</td>
+          						<td style="min-width:50px" align="center">Cotisation totale</td>
+          					</tr>
+                    <tr t-foreach="lines_data" t-as="r">
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('index')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('matricule')"/></td>
+          						<td style="min-width:50px" align="center"><span t-esc="r.get('name')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('Brut')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('Base')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('Prestfam')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('Acw')"/></td>
+          						<td style="min-width:50px" align="right"><span t-esc="r.get('Cotisation')"/></td>
+          					</tr>
+                    <tr t-foreach="lines_total" t-as="r">
+                      <td style="min-width:50px" colspan="3" align="center">Total</td>
+                      <td style="min-width:50px" align="right"><span t-esc="r.get('total_brut')"/></td>
+                      <td style="min-width:50px" align="right"><span t-esc="r.get('total_base')"/></td>
+                      <td style="min-width:50px" align="right"><span t-esc="r.get('total_prestfam')"/></td>
+                      <td style="min-width:50px" align="right"><span t-esc="r.get('total_acw')"/></td>
+                      <td style="min-width:50px" align="right"><span t-esc="r.get('total_cotisation')"/></td>
+                    </tr>
+          				</table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+
+<record id="view_optesis_securite_sociale" model="ir.ui.view">
+            <field name="name">optesis.payslip.lines.securite.sociale</field>
+            <field name="model">optesis.payslip.lines.securite.sociale</field>
+            <field name="arch" type="xml">
+            <form string="Contribution Register's Payslip Lines">
+                <group col="4" colspan="6">
+                    <field name="date_from"/>
+                    <newline/>
+                    <field name="date_to"/>
+                </group>
+                <footer>
+                    <button name="print_report_css" string="Imprimer" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Annuler" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <!-- <record id="action_payslip_lines_css" model="ir.actions.act_window">
+              <field name="name">Securite Sociale</field>
+              <field name="type">ir.actions.act_window</field>
+              <field name="res_model">optesis.payslip.lines.securite.sociale</field>
+              <field name="view_type">form</field>
+              <field name="view_mode">form</field>
+              <field name="target">new</field>
+        </record>
+
+        <record model="ir.values" id="payslip_lines_securite_sociale_value">
+              <field name="model_id" ref="model_hr_contribution_register" />
+              <field name="name">Securité sociale</field>
+              <field name="key2">client_print_multi</field>
+              <field name="value" eval="'ir.actions.act_window,' + str(ref('action_payslip_lines_css'))" />
+              <field name="key">action</field>
+              <field name="model">hr.contribution.register</field>
+        </record> -->
+
+
+
+        <act_window
+              id="payslip_lines_securite_sociale_value"
+              name="Securité sociale"
+              multi="True"
+              key2="client_print_multi"
+              res_model="optesis.payslip.lines.securite.sociale"
+              src_model="hr.contribution.register"
+              view_mode="form"
+              target="new"
+              view_type="form"/>
+
+<!-- </data> -->
+</odoo>

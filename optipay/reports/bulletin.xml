@@ -1,0 +1,564 @@
+<odoo>
+<data>
+  <template id="report_payslip_demo_inherit" inherit_id="hr_payroll.report_payslip">
+  <xpath expr="/t/t/t/t/div/table[1]/tr[1]/td[1]/strong" position="replace">
+    <strong>Addresse</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[1]/td[1]/strong" position="replace">
+    <strong>Adresse</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[1]/strong" position="replace">
+    <strong>Boite postal<br/></strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[1]/strong" position="replace">
+    <strong>Boite postale<br/></strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[1]/strong" position="replace">
+    <strong>Téléphone</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[1]/strong" position="replace">
+    <strong>Fax</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[1]/td[3]/strong" position="replace">
+    <strong>Matricule</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[2]" position="replace">
+    <td>
+      <span t-field="o.employee_id.job_id"/>
+    </td>
+    <td>
+      <span>New Text Block</span>
+    </td>
+    <td>
+      <span>New Text Block</span>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[3]/span" position="replace">
+    <span>Nom et Prenom<br/></span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[3]/span" position="attributes">
+    <attribute name="class" separator=" " add="o_bold"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[5]/td[1]/strong" position="replace">
+    <strong>Mode de réglement<br/></strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[5]/td[3]/strong" position="replace">
+    <strong>Lieu de travail<br/></strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[3]/strong" position="replace">
+    <strong>Fax</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[5]/td[1]/strong" position="replace">
+    <strong>Mode de règlement<br/></strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[1]/strong" position="replace">
+    <strong>Mode de règlement</strong>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[3]/strong" position="replace">
+    <strong>Lieu de travail</strong>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[5]/td[4]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[5]/td[3]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[5]/td[2]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[5]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]" position="after">
+    <table class="table o_report_block_table">
+      <thead>
+        <tr>
+          <th>
+            <span>Name</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr t-foreach="o.line_ids" t-as="table_line">
+          <td>
+            <span t-field="table_line.display_name"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]" position="after">
+    <table class="table table-sm table-bordered">
+      <tbody>
+        <tr>
+          <td>
+            <strong>Date de naissance</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+          <td>
+            <strong>Date embauche</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Situation Matrimoniale</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+          <td>
+            <strong>Fonction</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Numéro Sécurité Social</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+          <td>
+            <strong>Fonction Caisse de Retraite</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Nb Parts</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+          <td>
+            <strong>Convention Collective</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <strong>Numéro carte d'identité</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+          <td>
+            <strong>Grade</strong>
+          </td>
+          <td>
+            <span t-field="o.employee_id.job_id"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[1]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.birthday</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[1]/td[4]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.contract_id.date_start</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[2]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.marital</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[2]/td[4]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.job_id.name</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[3]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.ssnid</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[3]/td[4]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.ipres</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[4]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.ir</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[5]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.identification_id</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[5]/td[4]/span[1]" position="attributes">
+    <attribute name="t-field"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[2]/tbody[1]/tr[4]/td[4]/span[1]" position="attributes">
+    <attribute name="t-field"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="class" separator=" " add="o_bold"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="replace">
+    <h2 class="o_bold">Bulletin de paie</h2>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-left:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-right:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-left:150px" remove="margin-left:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-left:200px" remove="margin-left:150px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-right:200px" remove="margin-right:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[4]/span" position="after">
+    <span t-field="docs.employee_id.name"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[2]/td[4]/span[1]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[2]" position="inside">
+    <span>New Text Block</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[4]" position="inside">
+    <span>New Text Block</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[2]/span[2]" position="after">
+    <span t-field="docs.employee_id.mobile_phone"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[3]/td[2]/span[2]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[4]/span[2]" position="replace">
+    <span>
+      <br/>
+    </span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[4]" position="inside">
+    <span>New Text Block</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[4]/span[2]" position="after">
+    <span t-field="docs.employee_id.work_location"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[4]/td[4]/span[2]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[1]/td[2]/span[1]" position="attributes">
+    <attribute name="t-field">o.employee_id.address_home_id.contact_address</attribute>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[2]/span" position="after">
+    <span>New Text Block</span>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[2]/td[2]/span[1]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[2]/td[2]/span" position="replace">
+    <span>
+      <br/>
+    </span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[2]/span" position="after">
+    <span>New Text Block</span>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tr[4]/td[2]/span[1]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[4]/td[2]/span" position="replace">
+    <span>
+      <br/>
+    </span>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/p[2]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[2]" position="after">
+    <table class="table o_report_block_table">
+      <thead>
+        <tr>
+          <th>
+            <span>Name</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr t-foreach="o.line_ids" t-as="table_line">
+          <td>
+            <span t-field="table_line.display_name"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th" position="before">
+    <th>
+      <span>Code</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td" position="before">
+    <td>
+      <span t-field="table_line.code"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]" position="after">
+    <th>
+      <span>Taux (%)</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td[2]" position="after">
+    <td>
+      <span t-field="table_line.rate"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[3]" position="after">
+    <th>
+      <span>Total</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td[3]" position="after">
+    <td>
+      <span t-field="table_line.total"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[4]" position="after">
+    <th>
+      <span>Total</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td[4]" position="after">
+    <td>
+      <span t-field="table_line.total"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[5]" position="after">
+    <th>
+      <span>Total</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td[5]" position="after">
+    <td>
+      <span t-field="table_line.total"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]" position="after">
+    <th>
+      <span>Montant</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/tbody/tr/td[2]" position="after">
+    <td>
+      <span t-field="table_line.amount"/>
+    </td>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[3]/span" position="replace">
+    <span>Base</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[4]/span" position="replace">
+    <span>Taux<br/></span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[5]/span" position="replace">
+    <span>Charges Pat<br/></span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[6]/span" position="replace">
+    <span>Gains</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[7]/span" position="replace">
+    <span>Retenues</span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]/span" position="replace">
+    <span>Rubrique de paie<br/></span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]/span" position="replace">
+    <span>Rubriques de paie<br/></span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]/span" position="attributes">
+    <attribute name="style" separator=";" add="margin-left:10px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]/span" position="attributes">
+    <attribute name="style" separator=";" add="margin-left:20px" remove="margin-left:10px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]/thead/tr/th[2]/span" position="attributes">
+    <attribute name="style" separator=";" remove="margin-left:20px"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[1]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[2]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[3]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[4]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[5]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[6]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[5]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.name != "Net" and table_line.salary_rule_id.category_id.code == "COMP" and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[6]/span[1]" position="attributes">
+    <attribute name="t-if">(((table_line.name != "Net" and table_line.salary_rule_id.category_id.code == "BASE" or table_line.salary_rule_id.category_id.code == "INDM") or table_line.salary_rule_id.category_id.code == "NOIMP") or table_line.salary_rule_id.category_id.code == "BRUT") and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[7]/span[1]" position="attributes">
+    <attribute name="t-if">((table_line.salary_rule_id.category_id.code == "DED" or table_line.salary_rule_id.category_id.code == "TRIMF") or table_line.salary_rule_id.category_id.code == "SALC") and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[7]/span[1]" position="attributes">
+    <attribute name="t-if">((table_line.category_id.code == "DED" or table_line.category_id.code == "TRIMF") or table_line.category_id.code == "SALC") and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[6]/span[1]" position="attributes">
+    <attribute name="t-if">(((table_line.name != "Net" and table_line.category_id.code == "BASE" or table_line.category_id.code == "INDM") or table_line.category_id.code == "NOIMP") or table_line.category_id.code == "BRUT") and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[5]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.name != "Net" and table_line.category_id.code == "COMP" and table_line.appears_on_payslip is True</attribute>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[2]" position="attributes">
+    <attribute name="style" separator=";" add="width:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[1]/tr[3]/td[2]" position="attributes">
+    <attribute name="style" separator=";" add="width:150px" remove="width:100px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[3]" position="after">
+    <table class="table o_report_block_table">
+      <thead>
+        <tr>
+          <th>
+            <span>Name</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr t-foreach="docs" t-as="table_line">
+          <td>
+            <span t-field="table_line.display_name"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/thead[1]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[3]" position="after">
+    <div class="row">
+      <div class="col-5"/>
+      <div class="col-5 offset-2">
+        <table class="table table-sm o_report_block_total">
+          <t t-set="total_currency_id" t-value="o.env['res.currency']"/>
+          <t t-set="total_amount_total" t-value="0.0"/>
+          <t t-set="total_amount_untaxed" t-value="0.0"/>
+          <t t-set="total_amount_by_groups" t-value="None"/>
+          <tr t-if="total_amount_untaxed != total_amount_total">
+            <th>Subtotal</th>
+            <td colspan="2" class="text-right">
+              <span t-esc="total_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': total_currency_id}"/>
+            </td>
+          </tr>
+          <t t-foreach="total_amount_by_groups" t-as="total_amount_by_group">
+            <tr>
+              <th>
+                <span t-esc="total_amount_by_group[0]"/>
+              </th>
+              <td>
+                <small t-if="len(total_amount_by_group) &gt; 4 and total_amount_by_group[2] and total_amount_untaxed != total_amount_by_group[2]">on <span t-esc="total_amount_by_group[4]"/></small>
+              </td>
+              <td class="text-right">
+                <span t-esc="total_amount_by_group[3]"/>
+              </td>
+            </tr>
+          </t>
+          <t t-if="total_amount_by_groups is None and total_amount_total != total_amount_untaxed">
+            <tr>
+              <th>Taxes</th>
+              <td/>
+              <td class="text-right">
+                <span t-esc="total_amount_total - total_amount_untaxed" t-options="{'widget': 'monetary', 'display_currency': total_currency_id}"/>
+              </td>
+            </tr>
+          </t>
+          <tr class="border-black">
+            <th>Total</th>
+            <td colspan="2" class="text-right">
+              <span t-esc="total_amount_total" t-options="{'widget': 'monetary', 'display_currency': total_currency_id}"/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[1]/div[2]/table[1]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/div" position="after">
+    <table class="table o_report_block_table">
+      <thead>
+        <tr>
+          <th>
+            <span>Name</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr t-foreach="o.line_ids" t-as="table_line">
+          <td>
+            <span t-field="table_line.display_name"/>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/thead/tr/th" position="after">
+    <th>
+      <span>Total</span>
+    </th>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/tbody/tr/td" position="after">
+    <td>
+      <span t-field="table_line.total"/>
+    </td>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/tbody[1]/tr[1]/td[2]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.name == "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/tbody[1]/tr[1]/td[1]" position="attributes">
+    <attribute name="t-if">table_line.name == "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/tbody[1]/tr[1]/td[2]" position="attributes">
+    <attribute name="t-if">table_line.name == "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[1]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True and table_line.name != "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[2]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True and table_line.name != "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[3]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True and table_line.name != "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[4]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True and table_line != "Net"</attribute>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[3]/tbody[1]/tr[1]/td[4]/span[1]" position="attributes">
+    <attribute name="t-if">table_line.appears_on_payslip is True and table_line.name != "Net"</attribute>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/thead/tr/th[2]/span" position="replace">
+    <span>
+      <br/>
+    </span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/thead/tr/th[1]/span" position="replace">
+    <span>
+      <br/>
+    </span>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/tbody/tr/td[1]/span" position="attributes">
+    <attribute name="class" separator=" " add="o_bold"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]" position="attributes">
+    <attribute name="style" separator=";" add="margin-top:50px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]" position="attributes">
+    <attribute name="style" separator=";" add="margin-top:20px" remove="margin-top:50px"/>
+  </xpath>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/thead[1]/tr[1]/th[1]" position="replace"/>
+  <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[4]/thead[1]" position="replace"/>
+  <xpath expr="/t/t/t/t/div/table[4]/tbody/tr/td[1]" position="attributes">
+    <attribute name="style" separator=";" add="width:300px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/table[4]/tbody/tr/td[1]" position="attributes">
+    <attribute name="style" separator=";" add="width:600px" remove="width:300px"/>
+  </xpath>
+  <xpath expr="/t/t/t/t/div/h2" position="attributes">
+    <attribute name="style" separator=";" add="margin-right:250px" remove="margin-right:200px"/>
+  </xpath>
+</template>  
+</data>
+</odoo>

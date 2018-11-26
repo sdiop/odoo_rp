@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+    <data>
+
+        <record id="view_declaration_revenue_wizard" model="ir.ui.view">
+            <field name="name">Declaration de Revenue</field>
+            <field name="model">optipay.declaration.revenue.wizard</field>
+            <field name="arch" type="xml">
+              <form string="Contribution Register's Payslip Lines">
+                  <group col="4" colspan="6">
+                      <field name="date_from"/>
+                      <newline/>
+                      <field name="date_to"/>
+                  </group>
+                  <footer>
+                      <button name="print_report" string="Imprimer" type="object" class="oe_highlight"/>
+                      or
+                      <button string="Annuler" class="oe_link" special="cancel"/>
+                  </footer>
+              </form>
+            </field>
+        </record>
+
+        <act_window id="launch_declaration_retenue_wizard"
+                   name="Déclarations des retenues"
+                   src_model="hr.contribution.register"
+                   res_model="optipay.declaration.revenue.wizard"
+                   view_mode="form"
+                   target="new"
+                   key2="client_print_multi"/>
+
+        <!-- <record id="action_optipay_open_wizard" model="ir.actions.server">
+           <field name="name">Déclarations des retenues</field>
+           <field name="res_model">optipay.declaration.revenue.wizard</field>
+           <field name="model_id" ref="model_hr_contribution_register"/>
+           <field name="state">code</field>
+           <field name="condition">True</field>
+           <field name="code">object.open_wizard_function()</field>
+         </record>
+         <record id="id_of_the_action_open_wizard" model="ir.values">
+           <field name="name">Déclarations des retenues</field>
+           <field name="model">hr.contribution.register</field>
+           <field name="key" >action</field>
+           <field name="key2">client_print_multi</field>
+           <field name="value" eval="'ir.actions.server,%d'%action_optipay_open_wizard"/>
+         </record> -->
+
+    </data>
+</odoo>

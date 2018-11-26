@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- by khk -->
+<odoo>
+
+      <report
+      id="cotisation_ipres"
+      model="hr.contribution.register"
+      string="Cotisation Ipres"
+      report_type="qweb-pdf"
+      name="optipay.report_ipres_view"
+      file="optipay.report_ipres"
+      menu="False"
+      />
+
+    <template id="report_ipres_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                      <table style="width:80%">
+                        <tr>
+                          <td><p><span t-field="res_company.partner_id.street"/></p></td>
+                        </tr>
+                        <tr>
+                          <td style="width:30%"><p>B.P: <span t-field="res_company.partner_id.zip"/></p></td>
+                          <td>Tél: <span t-field="res_company.partner_id.phone"/></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td style="width:30%">Fax: <!--<span t-field="res_company.partner_id.fax"/>--></td>
+                          <td>Email: <span t-field="res_company.partner_id.email"/></td>
+                          <td></td>
+                        </tr>
+                      </table>
+                      <table style="width:100%">
+                        <tr><td align="center"><h3><span style="background:#e5e7ea;">Cotisation IPRES</span></h3></td></tr>
+                      </table>
+                      <table >
+                        <tr align="center">
+                          <td style="width:30%"></td>
+                          <td align="right"><h4> <span style="margin-right:15px;background:#e5e7ea;">Période de</span></h4></td>
+                          <td><h4><span style="margin-right:15px;background:#e5e7ea;" t-esc="data['form']['date_from']"/></h4></td>
+                          <td><h4><span style="background:#e5e7ea;"> à </span></h4></td>
+                          <td><h4><span style=";background:#e5e7ea;margin-left:30px" t-esc="data['form']['date_to']"/></h4></td>
+                          <td style="width:20%"></td>
+                        </tr>
+                      </table>
+                      <br/>
+                      <table class="table table-condensed table-bordered">
+                        <tr>
+                          <td style="min-width:50px" align="center">N°</td>
+                          <td style="min-width:50px" colspan="2" align="center">Identification Employé</td>
+                          <td style="min-width:50px" align="center">Brut imposable</td>
+                          <td style="min-width:50px" colspan="4" align="center">IPRES régime général</td>
+                          <td style="min-width:50px" colspan="4" align="center">IPRES régime cadre</td>
+                          <td style="min-width:50px" align="center">Cotisation totale</td>
+                        </tr>
+                        <tr>
+                          <td style="min-width:50px"></td>
+                          <td style="min-width:50px"></td>
+                          <td style="min-width:50px"></td>
+                          <td style="min-width:50px"></td>
+                          <td style="min-width:50px" align="center">Base</td>
+                          <td style="min-width:50px" align="center">Employé</td>
+                          <td style="min-width:50px" align="center">Employeur</td>
+                          <td style="min-width:50px" align="center">Total RG</td>
+                          <td style="min-width:50px" align="center">Base</td>
+                          <td style="min-width:50px" align="center">Employé</td>
+                          <td style="min-width:50px" align="center">Employeur</td>
+                          <td style="min-width:50px" align="center">Total RC</td>
+                          <td style="min-width:50px"></td>
+                        </tr>
+                        <tr t-foreach="lines_data" t-as="r">
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('index')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('matricule')"/></td>
+                          <td style="min-width:50px" align="center"><span t-esc="r.get('name')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Brut')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Base_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Ipres_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Ipres_rg_pat')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Base_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Ipres_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Ipres_rc_pat')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Cotisation_totale')"/></td>
+                        </tr>
+                        <tr t-foreach="lines_total" t-as="r">
+                          <td style="min-width:50px" colspan="3" align="center">Total</td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('Brut')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_base_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_ipres_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_ipres_rg_pat')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_rg')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_base_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_ipres_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_ipres_rc_pat')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_rc')"/></td>
+                          <td style="min-width:50px" align="right"><span t-esc="r.get('total_cotisation')"/></td>
+                        </tr>
+                      </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="view_optesis_cotisation_ipres" model="ir.ui.view">
+        <field name="name">optesis.payslip.lines.cotisation.ipres</field>
+        <field name="model">optesis.payslip.lines.cotisation.ipres</field>
+        <field name="arch" type="xml">
+        <form string="Cotisation Ipres">
+            <group col="4" colspan="6">
+                <field name="date_from"/>
+                <newline/>
+                <field name="date_to"/>
+            </group>
+            <footer>
+                <button name="print_report_ipres" string="Imprimer" type="object" class="oe_highlight"/>
+                or
+                <button string="Annuler" class="oe_link" special="cancel"/>
+            </footer>
+        </form>
+        </field>
+    </record>
+
+      <!-- <record id="action_payslip_lines_cotisation_ipres" model="ir.actions.act_window">
+            <field name="name">Cotisation Ipres</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">optesis.payslip.lines.cotisation.ipres</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+      </record> -->
+
+      <!-- <record model="ir.values" id="payslip_lines_cotisation_ipres_value">
+            <field name="model_id" ref="model_hr_contribution_register" />
+            <field name="name">Cotisation Ipres</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_payslip_lines_cotisation_ipres'))" />
+            <field name="key">action</field>
+            <field name="model">hr.contribution.register</field>
+      </record> -->
+
+      <act_window
+            id="payslip_lines_cotisation_ipres_value"
+            name="Cotisation Ipres"
+            multi="True"
+            key2="client_print_multi"
+            res_model="optesis.payslip.lines.cotisation.ipres"
+            src_model="hr.contribution.register"
+            view_mode="form"
+            target="new"
+            view_type="form"/>
+
+</odoo>
